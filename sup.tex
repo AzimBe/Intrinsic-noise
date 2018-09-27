@@ -1,0 +1,445 @@
+\documentclass[notitlepage,dvips,rmp,fleqn,superscriptaddress,floatfix]{revtex4-1}
+\makeatletter
+\renewcommand\@biblabel[1]{#1.}
+\makeatother
+\bibpunct{[}{]}{,}{n}{,}{,}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{bm,graphicx,amsmath,amssymb}
+\usepackage{bm}
+\usepackage{txfonts}
+\usepackage{color}
+\newcommand{\mat}[2][cccccc]{\left[\begin{array}{#1}#2\\ \end{array}\right]}
+\newcommand{\ordo}[1]{{\cal O} \left( #1 \right)}
+
+\newcommand{\tka}{\tilde{k}_a}
+\newcommand{\tcp}{\tilde{c}_p}
+\newcommand{\tcr}{\tilde{c}_r}
+\newcommand{\tbeta}{b}
+\newcommand{\talpha}{\tilde{\alpha}}
+\newcommand{\hsv}{\hspace{-0.5mm}}
+\newcommand{\hsi}{\hspace{-1mm}}
+\newcommand{\hsiv}{\hspace{-1.5mm}}
+\newcommand{\hsii}{\hspace{-2mm}}
+
+\newcounter{Sequ}
+\newcounter{Salg}
+
+\newenvironment{SEqn}
+  {\stepcounter{Sequ}%
+    \addtocounter{equation}{-1}%
+    \renewcommand\theequation{S\arabic{Sequ}}\equation}
+  {\endequation}
+
+\newenvironment{SAln}
+  {\setcounter{Salg}{\theequation}
+    \setcounter{equation}{\theSequ}%
+    \renewcommand\theequation{S\arabic{equation}}
+    \align}
+  {\endalign\setcounter{Sequ}{\value{equation}}\setcounter{equation}{\theSalg}}
+
+
+\newenvironment{SEquations}
+  {\stepcounter{Sequ}%
+    \addtocounter{subequations}{-1}%
+    \renewcommand\theequation{S\arabic{Sequ}}\subequations}
+  {\endequation}
+
+%-------------------------------------------------------------------------
+
+\begin{document}
+
+\author{Azim B. Besya}
+\affiliation{Ume{\aa} Plant Science Centre. Department of Plant Physiology. Ume{\aa} University. SE-901 87 Ume{\aa}. Sweden.}
+\author{Andreas Gr\"onlund}
+\affiliation{Ume{\aa} Plant Science Centre. Department of Plant Physiology. Ume{\aa} University. SE-901 87 Ume{\aa}. Sweden.}
+\email{gronlund@math.uu.se}
+
+\title{Supplementary Information\\
+\small Intrinsic phenotypic stability of a bi-stable auto regulatory gene}
+
+\setcounter{page}{1}
+
+
+\maketitle
+
+\section{Chemical reaction network}
+
+\noindent We will investigate the two minimal reaction networks needed to generate bi-stability, positive transcriptional auto regulatory feedback; when the feedback are mediated through two proteins that form a complex on the promoter, and secondly when the proteins form dimers in the solution and then bind on the promoter. The participating molecules and their numbers are mRNA, $M$, free protein monomers, $P$, and protein dimers (in case of dimer formation), $P_2$. Each reaction $k$, its propensity $a_k$ and stoichiometric coefficient $\bm{\nu}_k=(\Delta M,\Delta P,\Delta P_2)_k$ is listed, where $\Delta X$ are the number of molecules gained, or loss, in the specific reaction. The properties of a bistable system are highly dependent upon the details of the reaction rates e.g. synthesis and decay rates. Since we are interested in analysing the intrinsic stochastic properties of the bistable system it is convenient if the reaction network can be scaled from a system of few molecules to a large number of molecules without affecting the bi-stability. This can be achieved by introducing a system size parameter $\Omega$ (ref [22] in the main text). In this setting we can view the scaled variables as concentrations, e.g. the protein monomer concentration $p=P/\Omega$, such that all fixed point concentrations $x=X/\Omega$ are invariant under a change in $\Omega$. Even though changing $\Omega$ can be viewed as a change in volume it should primarily be viewed as a scaling parameter that gives us additional freedom when choosing the number of molecules in the stable states. We have for both feedback processes assumed fast binding and unbinding of the proteins on the promoter such that the transcription rate can be approximated by the average binding occupancy of proteins on the promoter.
+
+\subsection{Cooperative binding feedback}
+
+Below we have listed the biochemical steps leading to positive autoregulation where two proteins bind cooperatively on two sites located at the promoter to assist RNA polymerase to bind and initiate transcription.
+
+\begin{SEqn}
+\begin{array}{llll}
+\textnormal{Transcription, } &  M \to M + 1 \,,& a_1 = \Omega F(p) \,,& \bm{\nu}_1=\left[\begin{matrix} 1\\ 0 \end{matrix}\right] \\
+\textnormal{Translation, } & P \to P + 1 \,,& a_2 = k_p M \,,&\bm{\nu}_2=\left[\begin{matrix} 0\\ 1 \end{matrix}\right]\\
+\textnormal{mRNA decay, } & M \to M - 1  \,,& a_3 = \gamma_m M \,,& \bm{\nu}_3=\left[\begin{matrix} -1\\ 0 \end{matrix}\right]\\
+\textnormal{Protein decay, } & P \to P - 1  \,,& a_4 = \gamma_{p} P  \,,& \bm{\nu}_4=\left[\begin{matrix} 0\\ -1 \end{matrix}\right]\\
+\textnormal{The function } F(p)=k_{m,0}+k_{m,a}\displaystyle\frac{p^2}{K^2 + p^2}
+\end{array}
+\label{Eq:ReactProm}
+\end{SEqn}
+%
+The transcription rate of the free promoter is $k_{m,0}$ and the transcription rate when two proteins are present to assist the RNA polymerase to bind is $k_{m,0}+k_{m,a}$. The function $F(p)$ is the average occupancy of the protein complex on the promoter as a function of the protein concentration $p=P/\Omega$. We have assumed that the cooperative binding is strong and that both proteins are needed to assist the RNA polymerase to bind on the promoter, otherwise a linear term in $p$ should be present both in the denominator and numerator of $F(p)$. $K$ is the dissociation constant of the protein complex to its binding site on the promoter and gives the inverse strength of the binding.
+
+\subsection{Dimer binding feedback}
+
+Below we have listed the biochemical steps giving positive autoregulation by protein dimers binding on the promoter. Two proteins form a dimer in solution and can then bind at the promoter to assist RNA polymerase to bind and initiate transcription. 
+
+\begin{SEqn}
+\begin{array}{llll}
+\textnormal{Transcription, } &  M \to M + 1 \,,& a_1 = \Omega F(p_2) \,,& \bm{\nu}_1=\left[\begin{matrix} 1\\ 0\\ 0 \end{matrix}\right] \\
+\textnormal{Translation, } & P \to P + 1 \,,& a_2 = k_p M \,,&\bm{\nu}_2=\left[\begin{matrix} 0\\ 1\\ 0 \end{matrix}\right]\\
+\textnormal{Dimerisation, } &   P + P  \to P_2 \,,& a_3 = \frac{k_1}{\Omega} P^2 \,,& \bm{\nu}_3=\left[\begin{matrix} 0\\ -2\\ 1 \end{matrix}\right]\\
+\textnormal{Un-dimerisation, } &  P_2  \to P + P \,,& a_4 = k_{-1} P_2  \,,& \bm{\nu}_4=\left[\begin{matrix} 0\\ 2\\ -1 \end{matrix}\right]\\
+\textnormal{mRNA decay, } & M \to M - 1  \,,& a_5 = \gamma_m M \,,& \bm{\nu}_5=\left[\begin{matrix} -1\\ 0\\ 0 \end{matrix}\right]\\
+\textnormal{Monomer decay, } & P \to P - 1  \,,& a_6 = \gamma_{p} P  \,,& \bm{\nu}_6=\left[\begin{matrix} 0\\ -1\\ 0 \end{matrix}\right]\\
+\textnormal{Dimer decay, } &   P_2 \to P_2 - 1  \,,& a_7 = \gamma_{p_2} P_2  \,,& \bm{\nu}_7=\left[\begin{matrix} 0\\ 0\\ -1 \end{matrix}\right]\\
+\textnormal{The function } F(p_2)=k_{m,0}+k_{m,a}\displaystyle\frac{p_2}{K_2 + p_2}
+\end{array}
+\label{Eq:ReactDim}
+\end{SEqn}
+%
+where $k_{m,0}$ is transcription rate of the free promoter and the transcription rate when a protein dimer is present to assist the RNA polymerase to bind is $k_{m,0}+k_{m,a}$. The dissociation constant $K_2$ gives the (inverse) binding strength of dimers on the promoter and the function $F(p_2)$ is the average occupancy of dimers on the promoter as a function of the number of dimers in solution.
+
+Most calculations and derivations that will follow are performed for dimer mediated feedback since the results for the cooperative promoter feedback can be obtained as a special case by the right choice of parameters. Stochastic simulations of the above two type of feedback systems, cooperative binding feedback and dimer binding feedback, are implemented as a reference for the analytical derivations.
+
+\section{Large molecule number limit calculations} 
+%
+\noindent In the large molecule limit, $\Omega \to \infty$, the concentrations $(m,p,p_2)=(M,P,P_2)/\Omega$ become continuous and reactions occur continuous in time. The concentrations of the molecules in equation~\ref{Eq:ReactDim} will in the large molecule limit evolve according to the following set of ordinary differential equations (ODE)
+%
+\begin{SEqn}
+\begin{split}
+\frac{dm}{dt} &= F(p_2) -\gamma_m m \\  
+\frac{dp}{dt} &= k_p m + 2k_{-1}p_2 - 2k_1p^2 - \gamma_{p} p\\ 
+\frac{dp_2}{dt} &= k_1 p^2 - k_{-1} p_2 - \gamma_{p_2} p_2
+\end{split}
+\label{Eq:LargeLim} 
+\end{SEqn}
+%
+When mRNA turnover is fast compared to other reactions, $\frac{dm}{dt}=0$, we have that $m = F(p_2)/\gamma_m$. Then we have from equation~\ref{Eq:LargeLim} for the total concentration $p_T=p+2p_2$,
+%
+\begin{SEqn}
+\frac{dp_T}{dt}=\frac{d(p+2p_2)}{dt}=F(p_2)-\gamma_p p-2\gamma_{p_2}p_2
+\label{Eq:LargeLimT}
+\end{SEqn}
+%
+If monomers and dimers are (rapidly) partitioned according to the dissociation constant $K_1 = k_{-1}/k_1$, then $p_2 = p^2/K_1$. We can now formulate a closed form differential equation for \emph{any} of the concentrations $p$, $p_2$ or $p_T$ since each can be expressed from the other two. For the bifurcation analysis that follows it is most convenient to write the equation in terms of a scaled monomer concentration $\rho=\frac{p}{K}$, with $K^2=K_1K_2$ and scaled time $\tau= \gamma_p  t$  
+%
+\begin{SEqn}
+\begin{split}
+\frac{d\rho_T}{d\tau}&=\frac{d}{d\tau}\left(\rho+2\rho_2\right)=\frac{d}{d\tau}\left(\rho+\frac{2K}{K_1}\rho^2\right)= {\left(1+\frac{4K}{K_1}\rho\right)}\frac{d\rho}{d\tau}=S_0 + S_a \left( \frac{\rho^2}{1+\rho^2}\right) - \left(\rho + \alpha  \rho^2 \right)\equiv \Phi_{\rho_T,\textnormal{DIM}}(\rho)\\
+\Rightarrow \frac{d\rho}{d\tau}&={\left(1+\frac{4K}{K_1}\rho\right)^{-1}}\left(S_0 + S_a \left( \frac{\rho^2}{1+\rho^2}\right) - \left(\rho + \alpha  \rho^2 \right)\right)\equiv \Phi_{\rho,\textnormal{DIM}}(\rho)
+\end{split}
+\label{Eq:LargeLim2}
+\end{SEqn}
+%
+where $S_0= \frac{k_0}{K} \frac{k_p}{\gamma_m \gamma_p}  $, $S_a=\frac{k_a}{K}  \frac{k_p}{\gamma_m \gamma_p}  $, ${\rho}=\frac{p}{K }$ and  $\alpha=2 \frac{\gamma_{P_2}}{\gamma_{P}} \frac{K}{K_1}$. The subscript $\rho$ and $\rho_T$ for the function $\Phi$ are denoting whether the function generates the dynamics of the monomer concentration $\rho$ or the total concentration $\rho_T$ for dimer binding feedback. The two descriptions are equivalent since all concentrations are uniquely determined, e.g. knowing $\rho$ uniquely gives $\rho_T$ and $\rho_2$. Similar calculations as above for the cooperative binding feedback gives that
+%
+\begin{SEqn}
+\frac{d\rho}{d\tau}=S_0 + S_a \left( \frac{\rho^2}{1+\rho^2}\right) - \rho\equiv \Phi_{\textnormal{CP}}(\rho)
+\label{Eq:LargeLimCp}
+\end{SEqn}
+%
+We can see that this result is also obtained by letting $K_1\to \infty$ (i.e. no dimers) which gives $\alpha=0$ in equation~\ref{Eq:LargeLim2}. Note that for the case of dimers mediating the feedback \--- no dimers would result in no feedback. However, the operation can be performed to obtain the result for cooperative binding feedback, even though feedback is then physically mediated by monomers. We will use the result later as a quick route of deriving results for cooperative binding feedback.
+
+\subsection{Stability and bifurcation analysis} 
+%
+\noindent Assume that we have a potential function $U(x)$ such that a change in the concentration $x$ is driven by the drift term, $\Phi(x)=-\frac{dU}{dx}$. For the dimer binding feedback the drift (as a function on monomer proteins) equals the RHS of equation~\ref{Eq:LargeLim2}, $\Phi_{\rho.\textnormal{DIM}}(\rho)$ or equivalently $\Phi_{\rho_T.\textnormal{DIM}}(\rho)$. For cooperative binding feedback the drift equals the RHS of equation~\ref{Eq:LargeLimCp}, $\Phi_{\textnormal{CP}}(\rho)$. The observed concentration will change until the system is resting at a minima in $U(x)$ where its derivative is zero and its second derivative positive. This is called a \emph{stable} steady state. An \emph{unstable} steady state is where $U(x)$ is having a maximum. For the rate parameters where the system displays bi-stability there are always two stable stationary solutions separated by an unstable one and the region of bi-stability is given by the interval $(\rho_{*,1}, \rho_{*,2})$ where both endpoints are solutions of $\Phi(\rho_*) = 0$ and $\Phi'(\rho_*) = 0$. The region of bi-stability is given by
+%
+\begin{SEqn}
+\begin{split}
+S_a(\rho_*) &= \frac{(1 + 2 \alpha \rho_*) (1 + \rho_*^2)^2}{2 \rho_*}\\
+S_0(\rho_*) &= \rho_* +  \alpha \rho_*^2 - \frac{\rho_*}{2} (1 + 2 \alpha \rho_*) (1 + \rho_*^2)\, ,
+\end{split}
+\label{Eq:SCrit}
+\end{SEqn}
+%
+where $\rho_*$ are the monomer concentrations separating the bi-stable region. The region of bi-stability in $(S_a,S_0)$ space can for each choice of $\alpha$ be visualised by plotting the parametric curves of $S_0$ and $S_a$ against $\rho_*$. Moreover, it does not matter if we express the RHS of equation~\ref{Eq:SCrit} in terms of monomer, dimer or total concentration \--- the region of bi-stability in $(S_a,S_0)$ space is the same. The bifurcation for the cooperative binding feedback is obtained by letting $\alpha=0$.
+
+\section{Finite molecule number calculations and intrinsic stability} 
+%
+In the large molecule limit, where reactions are assumed to become continuous, the concentrations will converge to a (stable) stationary solution of the differential equations~\ref{Eq:LargeLim} (and equation~\ref{Eq:LargeLim2}) and stay there, unless the rate constants will change and another stationary solution is assumed. However, since the number of molecules are finite, the time between events of synthesis and decay will not be continuous but random and exponentially distributed with mean following the reaction propensities. The deviation from the stationary number of molecules that each reaction results in are also related to the total number of molecules since the smallest state jump is of the order of one molecule. Thus, for all systems consisting of a finite number of molecules we need to have a description of the noise and deviation from the stationary concentration. Such a description can be expressed differently, e.g. via a chemical master equation describing the probability of the different chemical states in time, or (as here) translating the chemical reaction system to a stochastic differential equation (SDE). We will use the former route since we are interested in calculating the escape rate from the stable states to compute their intrinsic stability. Moreover, we can express the stochastic properties of the system using any of the concentrations $\rho$, $\rho_2$ or $\rho_T$ as long as both the drift and noise term are describing the noise of the same quantity. The part describing the non-stochastic contribution to the evolution of the total concentration we already have, which is given by the right hand side of equation~\ref{Eq:LargeLim2} (with $\alpha=0$ for cooperative binding feedback). The stochastic contribution to the SDE we have to calculate, but before we do so we start with formulating the SDE and its corresponding Fokker-Planck equation (for the total protein concentration),
+%
+\begin{SEqn}
+\begin{split}
+d\rho_T(\tau)&=\Phi(\rho_T)d\tau+B(\rho_T) dW(\tau)\\
+\frac{\partial \Pi(\rho_T,\tau)}{\partial \tau} &= \Phi(\rho_T)\frac{\partial \left(\Pi(\rho_T,\tau) \right)}{\partial \rho_T} + \theta(\rho_T)\frac{\partial \left(\Pi(\rho_T,\tau) \right)}{2\partial \rho_T^2}
+\end{split}
+\label{Eq:SDEFP}
+\end{SEqn} 
+%
+Where $\Pi(\rho_T,\tau)$ is the probability distribution of the scaled total protein concentration, the drift term $\Phi(\rho_T)$ the right hand side of equation \label{Eq:LargeLimT}, and $W(\tau)$ is a Wiener Process. Now we need to quantify the diffusive noise term $\theta(\rho_T)= \frac{B^2(\rho_T)}{2}$. For a multivariate Ornstein-Uhlenbeck process defined by the stochastic differential equation $dx(t)=-\bm{A}x(t) dt +\bm{B}dW(t)$, where $\bm{A}$ and $\bm{B}$ are constant matrices, the covariance matrix $\bm{C}$ at stationary conditions satisfies a fluctuation-dissipation relation
+%
+\begin{SEqn}
+\bm{A C}+\bm{C}\bm{A}^T-\bm{BB}^T=0
+\label{Eq:FluDis}
+\end{SEqn}
+%
+If $x$ is sufficiently close to a stationary point $x_s$ we can for a more general system linearise the equations, e.g. \ref{Eq:LargeLim}, such that the fluctuation-dissipation relation~\ref{Eq:FluDis} (approximately) holds. The matrix $\bm{A}$ is then the Jacobian matrix evaluated at the stationary point $x_s$, and if we express the reactions in the two coordinates mRNA, $m$, and total protein, $p_T$, we obtain
+%
+\begin{SEqn}
+\textbf{A}=
+\left[\begin{matrix}  \frac{\partial f_m}{\partial m}  & \frac{\partial f_m}{\partial p_T} \\[0.5em]
+\frac{\partial f_p}{\partial m}  & \frac{\partial f_p}{\partial p_T} \end{matrix}\right]_{(m,p_T)_S}\, ,
+\label{Eq:Jacobian}
+\end{SEqn}
+%
+where $f_m=F(p_2)-\gamma_m m$ and $\displaystyle f_p= k_p m - (\gamma_p p + 2 \gamma_{p_2} p_2 )$ which gives that
+%
+\begin{SEqn}
+\textbf{A}=  \left[\begin{matrix}  
+-\gamma_m  &  \frac{\partial F(p_2)}{\partial p_T} \\
+k_p  & -\gamma_{P}(1 + 2 \beta \frac{\partial p_2}{\partial p_T} )  \end{matrix}\right]_{(m,p_T)_S}\, ,
+\label{Eq:Jacobian2}
+\end{SEqn}
+%
+where $\beta = \frac{\gamma_{p_2}}{\gamma_{p}} - 1$. The diffusion matrix $\bm{D}_{ij}=(\bm{BB}^T)_{ij}=\frac{1}{\Omega} \sum_{k} a_k v_{ki} v_{kj} $ for this set of reactions in stationary conditions $\displaystyle f_m=0 $ and $\displaystyle f_p=0 $ is 
+%
+\begin{SEqn}
+\displaystyle \textbf{D}= \frac{1}{\Omega} \left[\begin{matrix} 
+2 \gamma_m m  & 0 \\
+0  &  2 \gamma_{P} ( p_T + ( 3 \beta +1 ) p_2) \end{matrix}\right]_{(m,p_T)_S}\, ,
+\label{Eq:Diffusion}
+\end{SEqn}
+%
+The covariance matrix $\bm{C}$ can now be calculated from the fluctuation dissipation equation~\ref{Eq:FluDis}, which gives the variance of the total concentration of proteins at a stationary point as
+%
+\begin{SEqn}
+\textbf{C}_{22}=\left[ \frac{1}{\Omega}\frac{k_p }{\gamma_m+\gamma_p (1 + 2 \beta \frac{\partial p_2}{\partial p_T} )}
+  \frac{\frac{\frac{\partial F(p_2)}{\partial p_T} ( p_T + ( 3 \beta +1 ) p_2) }{ \gamma_p(1 + 2
+      \beta \frac{\partial p_2}{\partial p_T} )}+ p_T + 2 \beta p_2}{(1 + 2 \beta \frac{\partial P_2}{\partial p_T} ) - \frac{F' k_p}{\gamma_p\gamma_m}}
+       + \frac{1}{\Omega}\frac{p_T + ( 3 \beta +1 ) p_2}{1 + 2 \beta\frac{\partial p_2}{\partial p_T}}\right]_{{(p,p_2,p_T)}_S}
+  \label{Eq:C22}
+  \end{SEqn} 
+  %
+Now, assuming that mRNA turnover and protein dimerization are fast compared to the other time scales in the system we will collapse the reaction system listed in equations~\ref{Eq:ReactDim} with only synthesis and decay of proteins and its impact on the total number of proteins. One species, $P_T$, and three reactions,
+%
+\begin{SEqn}
+\begin{array}{llll}
+\textnormal{Synthesis, } P_T \to P_T + q \, , & a_1 = \frac{k_p}{\gamma_m} \frac{\Omega F(p_T)}{q} \, , & v_1 = q\\
+\textnormal{Decay of monomers, } P_T \to P_T - 1 \, , & a_2 = \gamma_p P \, , & v_2 = -1\\
+\textnormal{Decay of dimers, } P_T \to P_T - 2 \, , & a_3 = \gamma_{p_2} P_2 \, , & v_3 = -2
+\end{array}
+\label{Eq:ReactReduced}
+\end{SEqn}
+%
+where $q$ is number of total proteins added, i.e. the stoichiometry, per synthesis is now including both transcription and translation. We can think of $q$ as a parameter that accounts for the fact that the intrinsic stochasticity of protein synthesis propagates from transcription to translation and, if mRNA is short lived and translation fast, the multiple proteins translated per mRNA can be viewed as a stoichiometric effect on the synthesis events appearing with the rate of transcription initiation. If we want to collapse the reactions of equation~\ref{Eq:ReactDim} with the reduced set of reactions listed in \ref{Eq:ReactReduced} and recover the stochastic part we should match the covariance of the total concentration of proteins. For a scalar system the fluctuation dissipation relation, equation~\ref{Eq:FluDis}, becomes an algebraic equation and the variance is given by $C=-D/2A$ with
+%
+\begin{SEqn}
+A =\left[\frac{k_p}{\gamma_m}\frac{dF(p_T)}{dp_T} -\gamma_p (1 + 2 \beta \frac{\partial p_2}{\partial p_T} )\right]_{(p,p_2,p_T)_S}
+\label{Eq:JacobianRed}
+\end{SEqn}
+%
+and the diffusive component
+%
+\begin{SEqn}
+D = \left[\frac{\gamma_p}{\Omega}\left( 2 ( p_T + ( 3 \beta +1 ) p_2) + (q-1) ( p_T + 2 \beta p_2) \right)\right]_{(p,p_2,p_T)_S}
+\label{Eq:DiffRed}
+\end{SEqn}
+%
+Now, setting $\displaystyle C = \textbf{C}_{22}$, gives $q$ as 
+%
+\begin{SEqn}
+q = \left( 1+ 2 \frac{k_p}{\gamma_m + \gamma_{p}(1 + 2 \beta\frac{\partial p_2}{\partial p_T} )} \right) 
++ \frac{2 \frac{\partial F(p)}{\partial p_T} k_p (p_T + (3 \beta +1) p_2)}{\gamma_{p}(1 + 2 \beta \frac{\partial p_2}{\partial p_T} ) ( p_T + 2 \beta p_2)} 
+ \left(\frac{1}{\gamma_m + \gamma_{p}(1 + 2 \beta \frac{\partial p_2}{\partial p_T} )} - \frac{1}{\gamma_m} \right)
+\label{Eq:q}
+\end{SEqn}
+%      
+When $\gamma_m \gg \gamma_{p}(1 + 2 \beta\frac{\partial p_2}{\partial p_T} )$ we obtain $\displaystyle q = 1 + 2 \frac{k_p}{\gamma_m }$. For the stochastic differential equation and its Fokker-Planck equation~\ref{Eq:SDEFP} describing the scaled total concentration $\rho_T=p_T/K$ we obtain the noise term $B(\rho_T)$ by combining equations~\ref{Eq:DiffRed} and \ref{Eq:q}
+%
+\begin{SEqn}
+\theta(\rho_T) = \frac{B^2(\rho_T)}{2}=\frac{B^2(p_T)}{2K^2\gamma_p}=\frac{D}{2K^2\gamma_p}= \frac{1}{K \Omega} \left( \left(1+ \frac{k_p }{ \gamma_m}\right)\rho_T + \left(\frac{\gamma_{p_2}}{\gamma_{p}} + 2 \beta\left(1+ \frac{k_p }{ \gamma_m}\right)\right)\rho_2\right)
+\label{Eq:Theta}
+\end{SEqn}
+%
+Now, the term $B(\rho_T)$ (and $\theta(\rho_T)$) is strictly speaking only valid at a stable stationary point, $(p,p_2,p_T)_S$ i.e the two stable points of a bi-stable system, since we have done the calculations under such assumptions. However, we approximate $B(\rho_T)$ to have the same dependence on $\rho_T$ for all non-stationary points as well.\\
+For the dimer binding feedback the SDE and its Focker-Planck equation can be expressed in closed form in terms of the total concentration, since $\rho_2= \frac{K}{K_1} \left( \sqrt{ \frac{K_1}{2 K} \left(\rho_T + \frac{K_1}{8 K}\right)} - \frac{K_1}{4 K}\right)^2$,
+%
+\begin{SEqn}
+\begin{split}
+\Phi(\rho_T) &= \frac{d\rho_T}{d\tau} = S_0 +  S_a \frac{\left( \sqrt{ \frac{K_1}{2 K} \left(\rho_T + \frac{K_1}{8 K}\right)} - \frac{K_1}{4 K}\right)^2}{1+\left( \sqrt{ \frac{K_1}{2 K} \left(\rho_T + \frac{K_1}{8 K}\right)} - \frac{K_1}{4 K}\right)^2} - \left(\sqrt{ \frac{K_1}{2 K} \left(\rho_T + \frac{K_1}{8 K}\right)} - \frac{K_1}{4 K} + \alpha  \left( \sqrt{ \frac{K_1}{2 K} \left(\rho_T + \frac{K_1}{8 K}\right)} - \frac{K_1}{4 K}\right)^2\right) \\
+\theta(\rho_T) &= \frac{1}{K \Omega} \left( \left(1+ \frac{k_p }{ \gamma_m}\right)\rho_T + \frac{K}{K_1}\left(\frac{\gamma_{p_2}}{\gamma_{p}} + 2 \beta\left(1+ \frac{k_p }{ \gamma_m}\right)\right) \left( \sqrt{ \frac{K_1}{2 K} \left(\rho_T + \frac{K_1}{8 K}\right)} - \frac{K_1}{4 K}\right)^2\right)
+\end{split}
+\label{Eq:SDEFP_dim}
+\end{SEqn}
+%
+For the cooperative binding feedback we have the drift $\Phi(\rho)$ is given by RHS of equation~\ref{Eq:LargeLimCp}. The diffusion term $\theta(\rho)$ in the Fokker-Planck equation~\ref{Eq:SDEFP} is obtained by letting $K_1\to\infty$, giving $\rho_T=\rho$ and $\rho_2=0$ in equation~\ref{Eq:Theta}
+ %
+\begin{SEqn}
+\begin{split}
+\Phi(\rho) &= \frac{d\rho}{d\tau}=S_0 + S_a \left( \frac{\rho^2}{1+\rho^2}\right) - \rho\\
+\theta(\rho) &= \frac{1}{K \Omega}\left(1+ \frac{k_p }{ \gamma_m}\right)\rho
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+
+\vspace{2pc}
+\section{Escape time calculation} 
+%
+\noindent Using Eq. S8  for probability distribution of the scaled total protein concentration, the probability of this variable that remains in region $\displaystyle \textbf{R} $ at time $\displaystyle \tau $, $\displaystyle G\left(\rho _T,\tau\right) = \int_\textbf{R} \Pi( x,\tau\, | \,\rho _T,0 ) \text{d}x $, obeys the equation
+ %
+\begin{SEqn}
+\begin{split}
+\frac{\partial G\left(\rho _T,\tau\right) }{\partial \tau} = \Phi(\rho_T)\frac{\partial G\left(\rho _T,\tau\right) }{\partial \rho_T} + \theta(\rho_T) \frac{\partial^2 G\left(\rho _T,\tau\right) }{\partial \rho_T^2}  
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+integrating Eq. S21  over time interval $\displaystyle (0 , \infty) $ gives the differential equation governing escape time, $\displaystyle \Gamma(\rho_T) = - \int_0^\infty  \frac{\partial G\left(\rho _T,\tau\right) }{\partial t}  \text{d}\tau $,
+%
+\begin{SEqn}
+\begin{split}
+\Phi(\rho_T)\frac{d \Gamma(\rho_T)}{d \rho_T} + \theta(\rho_T) \frac{d^2 \Gamma(\rho_T)}{d \rho_T^2}   = -1
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+\noindent Division of both side of this equation by $\displaystyle \theta(\rho _T) $,  introduction of quasi-potential $\displaystyle \Psi $ where
+$\displaystyle \frac{d \Psi(\rho _T) }{d \rho_T}  = -\frac{\Phi(\rho_T)}{\theta(\rho_T) }$, and multiplication of both sides by $\displaystyle e^{-\Psi}
+$ gives $\displaystyle \frac{d}{d \rho_T} (e^{- \Psi}  \frac{d \Gamma(\rho_T)}{d \rho_T} ) = -
+e^{- \Psi - \text{ln}(\theta)} $ . Double integration of this
+equation from 0 to $\displaystyle y$ with boundary condition
+$\displaystyle \frac{d \Gamma(y)}{dy} |_{y=0} = 0$, and from low
+concentration stable point, $\displaystyle \rho_{T_L}$, to high concentration
+stable point, $\displaystyle \rho_{T_H}$, with boundary condition
+$\displaystyle \Gamma(\rho_{T_H})=0$ gives escape time from the low state to the high state, $\displaystyle \Gamma_{LH}  = \int\limits_{\rho_{T_L}}^{\rho_{T_H}} e^{\Psi} dy \int\limits_0^y
+e^{- \Psi - \text{ln}(\theta)} dz$. Double integration from
+$\displaystyle \infty$ to $\displaystyle y$ with boundary condition $\displaystyle
+\frac{d \Gamma(y)}{dy} |_{y \to \infty} = 0$, and from $\displaystyle \rho_{T_H}$ to
+$\displaystyle \rho_{T_L}$ with boundary condition $\displaystyle
+\Gamma(\rho_{T_L})=0$ gives the escape time from the high state to the low state, $\displaystyle \Gamma_{HL}  =  \int\limits_{\rho_{T_L}}^{\rho_{T_H}} e^{\Psi} dy
+\int\limits_y^{\infty} e^{- \Psi - \text{ln}(\theta)} dz$. In these
+equations for the escape time, the external integrands get their main
+contribution near the middle unstable stationary point, $\displaystyle
+\rho_{T_M}$, and the internal integrands get their main contribution near the low stable stationary point
+$\displaystyle \rho_{T_L}$ for $\displaystyle \Gamma_{LH}$, and near the high stable stationary point
+$\displaystyle \rho_{T_H}$ for $\displaystyle \Gamma_{HL} $. Therefore, a parabolic
+approximation of the integrand functions around the dominant points, 
+
+\begin{SEqn}
+ \Gamma_{LH,HL}= \int\limits_{- \infty}^{{\infty}} e^{\Psi (\rho_{T_M}) +\frac{1}{2} (y-\rho_{T_M})^2 \frac{d^2 }{d \rho_T^2}(\Psi) |_{\rho_{T_M}} }
+dy \int\limits_{- \infty}^{{\infty}} e^{-(\Psi+\text{ln}(\theta)) |_{\rho_{T_{L,H}}}-\frac{1}{2}  (z-\rho_{T_{L,H}})^2 \frac{d^2 }{d \rho_T^2}(\Psi+\text{ln}(\theta)) |_{\rho_{T_{L,H}}}} dz
+\label{Eq:ParB}
+\end{SEqn}
+ gives the escape time (in real time after division by $\gamma_p$, since $t=\tau/\gamma_p$),
+%
+\begin{SEqn}
+\begin{split}
+\Gamma_{LH,HL} = \frac{2 \pi e^{\Delta\Psi_{LH,HL} }}{ \gamma_{P} \theta(\rho_{T_{L,H}}) \sqrt{\frac{d^2 }{d \rho_T^2}(\Psi+\text{ln}(\theta)) |_{\rho_{T_{L,H}}} |\frac{d^2 }{d \rho_T^2}(\Psi) |_{\rho_{T_M}}|}}
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+\noindent where $\displaystyle \Delta\Psi_{LH,HL} = \Psi(\rho_{T_M})-\Psi(\rho_{T_{L,H}}) $, the quasi-potential for cooperative binding feedback is 
+%
+\begin{SEqn}
+\begin{split}
+\Psi(\rho) = \frac{K \Omega }{1 + \frac{k_p}{\gamma_m }} \left( -S_0 \text{ln}(\rho) -  \frac{S_a }{2 } \text{ln}(1+\rho^2) + \rho \right) 
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+\noindent and the quasi-potential for dimer binding feedback is
+%
+\begin{SEqn}
+\begin{split}
+\Psi(\tilde{\rho}_T) =  \frac{K \Omega }{1 + \frac{k_p}{\gamma_m }} \left(\text{ln}\left( \frac{\left( \sqrt{\tilde{\rho}_T} + \delta_1\right)^{n_1} \left(\sqrt{\tilde{\rho}_T} + \delta_2 \right)^{n_2}}{\left(\left(\sqrt{\tilde{\rho}_T} + \delta_3 \right)^2 + \delta_4 \right)^{n_3}} \right) + n_4 \text{tan}^{-1}\left(\frac{\sqrt{\tilde{\rho}_T} + \delta_3}{\sqrt{\delta_4}} \right) + n_5 \sqrt{\tilde{\rho}_T} + n_6 \tilde{\rho}_T \right) 
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+\noindent where  
+$\tilde{\rho}_T=\rho_T+\frac{K_1}{8 K}$,
+$\displaystyle \delta_1 = \frac{A_2}{2} +\sqrt{\left(\frac{A_2}{2} \right)^2 - B_2}$,
+$\displaystyle \delta_2 = \frac{A_2}{2} -\sqrt{\left(\frac{A_2}{2} \right)^2 - B_2}$,
+$\displaystyle \delta_3 = \frac{A_1}{2}$,
+$\displaystyle \delta_4 = B_1+\frac{1}{C_1}-\frac{A_1^2}{4}$,
+$\displaystyle n_1 = -\frac{2 \left(S_0+S_a\right) A_3}{C_2}  + \frac{2 S_a A_5}{C_1 C_2} + \frac{2 \alpha C_1}{C_2} \left(A_1 + \frac{A_0}{\alpha C_1} -A_2\right) A_6$,
+$\displaystyle n_2 = -\frac{2 \left(S_0+S_a\right) B_3}{C_2}  + \frac{2 S_a B_5}{C_1 C_2} + \frac{2 \alpha C_1}{C_2} \left(A_1 + \frac{A_0}{\alpha C_1} -A_2\right) B_6$,
+$\displaystyle n_3 = -\frac{S_a A_4}{C_1 C_2}  $,
+$\displaystyle n_4 = \frac{2 S_a}{C_1 C_2} \left(-A_4 \delta_3+B_4\right) $,
+$\displaystyle n_5 = \frac{2 \alpha C_1}{C_2} \left(A_1+\frac{A_0}{\alpha C_1}-A_2\right) $,
+$\displaystyle n_6 = \frac{\alpha C_1}{C_2}$.
+$\displaystyle A_0 = \sqrt{\frac{K_1}{2 K}}$,
+$\displaystyle B_0 = -\frac{K_1}{4 K}$,
+$\displaystyle C_0 = \frac{K}{K_1} \left(\frac{1 + 3 \beta + 2 \beta \frac{k_p}{\gamma_m } }{1 + \frac{k_p}{\gamma_m } } \right)$,
+$\displaystyle A_1 = -\sqrt{\frac{K_1}{2 K}}$,
+$\displaystyle B_1 = \frac{K_1}{8 K}$,
+$\displaystyle C_1 = \frac{K_1}{2 K}$,
+$\displaystyle A_2 = \frac{C_0 C_1 A_1}{C_2}$,
+$\displaystyle B_2 = \frac{C_0 C_1 B_1 - \frac{K_1}{8 K} }{C_2}$,
+$\displaystyle C_2 = 1 + C_0 C_1 $,
+$\displaystyle A_3 = \frac{-\delta_1}{\delta _2 - \delta_1}$,
+$\displaystyle B_3 = 1-A_3$,
+$\displaystyle \begin{pmatrix}
+  A_4  \\
+  B_4  \\
+ A_5  \\
+  B_5 
+ \end{pmatrix} =
+ \begin{pmatrix}
+  1& 0 & 1 & 1 \\
+  \delta_1+ \delta_2& 1 & 2\delta_3+ \delta_2 &  2\delta_3+\delta_1 \\
+  \delta_1  \delta_2 & \delta_1+ \delta_2  & \delta_3^2+\delta_4+2  \delta_2 \delta_3 &  \delta_3^2+\delta_4+2 \delta_1 \delta_3 \\
+  0 &  \delta_1  \delta_2 &  \delta_2 \left(\delta_3^2+\delta_4\right) & \delta_1 \left(\delta_3^2+\delta_4\right) 
+ \end{pmatrix}^{-1} \begin{pmatrix}
+  0 \\
+ 0  \\
+ 1  \\
+  0
+ \end{pmatrix} $,
+$\displaystyle \delta_5 = \frac{B_1+\frac{B_0}{\alpha C_1}-B_2}{A_1+\frac{A_0}{\alpha C_1}-A_2} - A_2$,
+$\displaystyle A_6 =  \frac{-B_2 -\delta_5 \delta_1}{\delta _2 - \delta_1} $,
+$\displaystyle B_6 = \delta_5  - A_6  $.
+
+%
+
+%
+\noindent and the quasi-potential for dimer binding feedback is
+%
+\begin{SEqn}
+\begin{split}
+\Psi(\tilde{\rho}_T) =  \frac{K \Omega }{1 + \frac{k_p}{\gamma_m }} \left(\text{ln}\left( \frac{\left( \sqrt{\tilde{\rho}_T} + \delta_1\right)^{n_1} \left(\sqrt{\tilde{\rho}_T} + \delta_2 \right)^{n_2}}{\left(\left(\sqrt{\tilde{\rho}_T} -\sqrt{\frac{K_1}{8 K}} \right)^2 + \frac{1}{4}\left(\frac{K_1}{K}+\frac{8 K}{K_1}\right) \right)^{n_3}} \right) + n_4 \text{tan}^{-1}\left(\frac{\sqrt{\tilde{\rho}_T} -\sqrt{\frac{K_1}{8 K}}}{\frac{1}{2}\sqrt{\frac{K_1}{K}+\frac{8 K}{K_1}}} \right) + n_5 \sqrt{\tilde{\rho}_T} + n_6 \tilde{\rho}_T \right) 
+\end{split}
+\label{Eq:SDEFP_cop}
+\end{SEqn}
+%
+\noindent where  
+$\tilde{\rho}_T=\rho_T+\frac{K_1}{8 K}$,
+$\displaystyle \delta_1 = \frac{\xi_1}{2}\left(1 +\sqrt{1-\frac{4 \xi_2}{\xi_1^2} }\right)$,
+$\displaystyle \delta_2 = \frac{\xi_1}{2}\left(1 -\sqrt{1-\frac{4 \xi_2}{\xi_1^2} }\right)$,
+$\displaystyle n_1 = -\frac{S_0+S_a}{1+\frac{\xi_0}{2 }} \left(1 + \frac{1}{\sqrt{1-\frac{4 \xi_2}{\xi_1^2} }}\right)  + \frac{4 S_a \xi_5 K}{K_1 \left(1+\frac{\xi_0}{2 }\right)} + \frac{\alpha K_1}{2 K\left(1+\frac{\xi_0}{2 }\right) \sqrt{1-\frac{4 \xi_2}{\xi_1^2} }} \left(\xi_2\left(\frac{1}{\alpha}\sqrt{\frac{2 K}{K_1}}-\sqrt{\frac{K_1}{2 K}}-\xi_1\right)+\delta_1\left(\frac{K_1}{8 K}+\frac{1}{2 \alpha}-\xi_2\right)\right)$,
+$\displaystyle n_2 = -\frac{S_0+S_a}{1+\frac{\xi_0}{2 }} \left(1 + \frac{1}{\sqrt{1-\frac{4 \xi_2}{\xi_1^2} }}\right)  + \frac{4 S_a \xi_6 K}{K_1 \left(1+\frac{\xi_0}{2 }\right)} + \frac{\alpha K_1}{2 K\left(1+\frac{\xi_0}{2 }\right) \sqrt{1-\frac{4 \xi_2}{\xi_1^2} }} \left(-\xi_2\left(\frac{1}{\alpha}\sqrt{\frac{2 K}{K_1}}-\sqrt{\frac{K_1}{2 K}}-\xi_1\right)+\left(2 \sqrt{1-\frac{4 \xi_2}{\xi_1^2} }-\delta_1\right)\left(\frac{K_1}{8 K}+\frac{1}{2 \alpha}-\xi_2\right)\right)$,
+$\displaystyle n_3 = -\frac{2 S_a \xi_3 K}{K_1 \left(1+\frac{\xi_0}{2 }\right)}  $,
+
+\noindent $\displaystyle n_4 = \frac{4 S_a K}{K_1 \left(1+\frac{\xi_0}{2 }\right)} \left(\xi_4 + \xi_3 \sqrt{\frac{K_1}{8 K}}\right) $,
+$\displaystyle n_5 = \frac{\alpha K_1}{K \left(1+\frac{\xi_0}{2 }\right)} \left(\frac{1}{\alpha}\sqrt{\frac{2 K}{K_1}}-\sqrt{\frac{K_1}{2 K}}-\xi_1\right) $,
+$\displaystyle n_6 = \frac{\alpha K_1}{K \left(2+\xi_0\right)}$.
+$\displaystyle \xi_0 = 2 \beta + \frac{1}{1+b}\frac{\gamma_{p_2}}{\gamma_{p}}$,
+$\displaystyle \xi_1 = -\frac{\sqrt{\frac{K_1}{2 K}}}{1+\frac{2}{\xi_0}}$,
+$\displaystyle \xi_2 = \frac{K_1}{8 K} \left(1 - \frac{2}{1 +\frac{\xi_0}{2 }} \right)$ and
+$\displaystyle \begin{pmatrix}
+  \xi_3  \\
+  \xi_4  \\
+  \xi_5  \\
+  \xi_6 
+ \end{pmatrix} =
+ \begin{pmatrix}
+  1& 0 & 1 & 1 \\
+  \delta_1+ \delta_2& 1 & -\sqrt{\frac{K_1}{2 K}}+ \delta_2 &  -\sqrt{\frac{K_1}{2 K}}+\delta_1 \\
+  \delta_1  \delta_2 & \delta_1+ \delta_2  & \frac{3K_1}{8 K}+\frac{2 K}{K_1}-2  \delta_2 \sqrt{\frac{K_1}{8 K}} &  \frac{3K_1}{8 K}+\frac{2 K}{K_1}-2 \delta_1 \sqrt{\frac{K_1}{8 K}} \\
+  0 &  \delta_1  \delta_2 &  \delta_2 \left(\frac{3K_1}{8 K}+\frac{2 K}{K_1}\right) & \delta_1 \left(\frac{3K_1}{8 K}+\frac{2 K}{K_1}\right) 
+ \end{pmatrix}^{-1} \begin{pmatrix}
+  0 \\
+ 0  \\
+ 1  \\
+  0
+ \end{pmatrix} $.
+%
+
+\end{document}
